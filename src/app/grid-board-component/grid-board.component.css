@@ -1,0 +1,18 @@
+.Board{
+    display: grid;
+    gap: 1px;
+    background-color: white;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+    min-width: 0;
+}
+
+.Tile{
+    background-color: blueviolet;
+    /* border: solid 1px black; */
+}
+
+.Tile:hover{
+    background-color: rgb(177, 120, 231);
+}
+
