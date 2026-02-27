@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { TopBarComponentComponent } from '../top-bar-component/top-bar.component';
 import { GridBoardComponentComponent } from '../grid-board-component/grid-board.component';
 import { SidePanelComponentComponent } from '../side-panel-component/side-panel.component';
@@ -12,69 +12,32 @@ import { Tile } from '../models/Tile';
   styleUrl: './game-engine.component.css'
 })
 export class GameEngineComponentComponent {
-  Tiles: Tile[] = [
-    {
-      id:"tile-1",
-      position: {x:0,y:0},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-2",
-      position: {x:1,y:0},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-3",
-      position: {x:2,y:0},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-4",
-      position: {x:0,y:1},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-5",
-      position: {x:1,y:1},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-6",
-      position: {x:2,y:1},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-7",
-      position: {x:0,y:2},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-8",
-      position: {x:1,y:2},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-    {
-      id:"tile-9",
-      position: {x:2,y:2},
-      type: 'floor',
-      isWalkable: false,
-      occupant: null
-    },
-  ];
+  /* dimension: WritableSignal<Number> = signal(3); */
+  dimension: number = 3; 
+  Tiles: WritableSignal<Tile[]> = signal(this.generateTiles());
+
+
+  changeDimension(dim: number){
+    this.dimension = dim;
+    this.Tiles.set(this.generateTiles());
+  }
+
+  generateTiles(){
+    return Array(this.dimension*this.dimension).fill(null).map(
+      (v,i)=> {
+        const t  = ['floor','hazard','wall'][Math.floor(Math.random() * 3)];
+        return {
+          id:`tile-${i+1}`,
+          position: {x: i%this.dimension, y: i/this.dimension},
+          type: t,
+          isWalkable: t != 'wall',
+          occupant: null
+        } 
+      }
+    );
+
+    
+  }
+
+
 }

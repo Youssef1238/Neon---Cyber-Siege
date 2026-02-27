@@ -5,6 +5,7 @@ main{
     display: flex;
     flex-direction: column;
     padding: 0;
+    --dimension: 3;
 }
 .content{
     width: 100%;
