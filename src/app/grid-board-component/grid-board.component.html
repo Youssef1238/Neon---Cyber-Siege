@@ -1,0 +1,8 @@
+<div class="Board" >
+    @if(_Tiles.length > 0){
+        @for(tile of _Tiles;track tile.id){
+            <app-tile-component class="Tile" [Tile]="tile"></app-tile-component>
+        }
+    }
+    
+</div>

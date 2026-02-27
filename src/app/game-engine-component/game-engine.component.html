@@ -1,0 +1,8 @@
+<main [style.--dimension]="dimension">
+    <app-top-bar-component (dimensionChangedEvent)="changeDimension($event)" ></app-top-bar-component>
+    <div class="content">
+        <app-side-panel-component></app-side-panel-component>
+        <app-grid-board-component [Tiles]="Tiles()"></app-grid-board-component>
+        <app-combat-log-component></app-combat-log-component>
+    </div>
+</main>
