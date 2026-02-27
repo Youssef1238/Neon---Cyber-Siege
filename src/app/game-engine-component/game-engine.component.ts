@@ -25,7 +25,7 @@ export class GameEngineComponentComponent {
   generateTiles(){
     return Array(this.dimension*this.dimension).fill(null).map(
       (v,i)=> {
-        const t  = ['floor','hazard','wall'][Math.floor(Math.random() * 3)];
+        const t = this.randomTile();
         return {
           id:`tile-${i+1}`,
           position: {x: i%this.dimension, y: i/this.dimension},
@@ -36,7 +36,14 @@ export class GameEngineComponentComponent {
       }
     );
 
-    
+  }
+
+  randomTile(): string{
+    const prob = Math.random();
+    if(prob > 0.75){
+      return prob < 0.9 ? 'wall' : 'hazard'; 
+    }
+    return 'floor';
   }
 
 
